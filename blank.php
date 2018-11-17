@@ -23,6 +23,8 @@
     <link rel="stylesheet" type="text/css" href="/tb_bdl/editor/assets/icon/icofont/css/icofont.css">
     <!-- feather Awesome -->
     <link rel="stylesheet" type="text/css" href="/tb_bdl/editor/assets/icon/feather/css/feather.css">
+    <!--forms-wizard css-->
+    <link rel="stylesheet" type="text/css" href="/tb_bdl/editor/bower_components/jquery.steps/css/jquery.steps.css">
     <!-- Data Table Css -->
     <link rel="stylesheet" type="text/css" href="/tb_bdl/editor/bower_components/datatables.net-bs4/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" type="text/css" href="/tb_bdl/editor/assets/pages/data-table/css/buttons.dataTables.min.css">
@@ -32,6 +34,8 @@
     <link rel="stylesheet" type="text/css" href="/tb_bdl/editor/assets/pages/j-pro/css/demo.css">
     <link rel="stylesheet" type="text/css" href="/tb_bdl/editor/assets/pages/j-pro/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="/tb_bdl/editor/assets/pages/j-pro/css/j-pro-modern.css">
+    <!-- animation nifty modal window effects css -->
+    <link rel="stylesheet" type="text/css" href="/tb_bdl/editor/assets/css/component.css">
     <!-- Style.css -->
     <link rel="stylesheet" type="text/css" href="/tb_bdl/editor/assets/css/style.css">
     <link rel="stylesheet" type="text/css" href="/tb_bdl/editor/assets/css/jquery.mCustomScrollbar.css">
@@ -158,9 +162,25 @@
                         <div class="pcoded-navigatio-lavel">Navigation</div>
                         <ul class="pcoded-item pcoded-left-item">
                             <li class="">
-                                <a href="navbar-light.html">
+                                <a href="http://localhost/tb_bdl/view/admin/jabatan">
                                     <span class="pcoded-micon"><i class="ti-crown"></i></span>
                                     <span class="pcoded-mtext">Jabatan</span>
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="pcoded-item pcoded-left-item">
+                            <li class="">
+                                <a href="http://localhost/tb_bdl/view/admin/kapal">
+                                    <span class="pcoded-micon"><i class="fa fa-ship"></i></span>
+                                    <span class="pcoded-mtext">Kapal</span>
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="pcoded-item pcoded-left-item">
+                            <li class="">
+                                <a href="http://localhost/tb_bdl/view/admin/kabkot">
+                                    <span class="pcoded-micon"><i class="ti-map-alt"></i></span>
+                                    <span class="pcoded-mtext">Kabupaten Kota</span>
                                 </a>
                             </li>
                         </ul>
@@ -264,6 +284,7 @@
     <script type="text/javascript" src="/tb_bdl/editor/bower_components/jquery-ui/js/jquery-ui.min.js"></script>
     <script type="text/javascript" src="/tb_bdl/editor/bower_components/popper.js/js/popper.min.js"></script>
     <script type="text/javascript" src="/tb_bdl/editor/bower_components/bootstrap/js/bootstrap.min.js"></script>
+
     <!-- j-pro js -->
     <script type="text/javascript" src="/tb_bdl/editor/assets/pages/j-pro/js/jquery.ui.min.js"></script>
     <script type="text/javascript" src="/tb_bdl/editor/assets/pages/j-pro/js/jquery.maskedinput.min.js"></script>
@@ -275,6 +296,12 @@
     <!-- modernizr js -->
     <script type="text/javascript" src="/tb_bdl/editor/bower_components/modernizr/js/modernizr.js"></script>
     <script type="text/javascript" src="/tb_bdl/editor/bower_components/modernizr/js/css-scrollbars.js"></script>
+
+    <!-- Masking js -->
+    <script src="/tb_bdl/editor/assets/pages/form-masking/inputmask.js"></script>
+    <script src="/tb_bdl/editor/assets/pages/form-masking/jquery.inputmask.js"></script>
+    <script src="/tb_bdl/editor/assets/pages/form-masking/autoNumeric.js"></script>
+    <script src="/tb_bdl/editor/assets/pages/form-masking/form-mask.js"></script>
 
     <!-- i18next.min.js -->
     <script type="text/javascript" src="/tb_bdl/editor/bower_components/i18next/js/i18next.min.js"></script>
@@ -299,10 +326,23 @@
     <script src="/tb_bdl/editor/bower_components/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
     <script src="/tb_bdl/editor/bower_components/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
     <script src="/tb_bdl/editor/bower_components/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
+    <!-- sweet alert js -->
+    <script type="text/javascript" src="/tb_bdl/editor/bower_components/sweetalert/js/sweetalert.min.js"></script>
+    <script type="text/javascript" src="/tb_bdl/editor/assets/js/modal.js"></script>
+    <!-- sweet alert modal.js intialize js -->
+    <!-- modalEffects js nifty modal window effects -->
+    <script type="text/javascript" src="/tb_bdl/editor/assets/js/modalEffects.js"></script>
+    <script type="text/javascript" src="/tb_bdl/editor/assets/js/classie.js"></script>
+    <script type="text/javascript" src="/tb_bdl/editor/assets/pages/j-pro/js/custom/currency-form.js"></script>
     <!-- Custom js -->
     <?php startblock('script') ?><?php endblock() ?>
     <?php startblock('table') ?><?php endblock() ?>
-    <script type="text/javascript" src="/tb_bdl/editor/assets/pages/j-pro/js/custom/currency-form.js"></script>
+    <!-- Validation js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
+    <script type="text/javascript" src="/tb_bdl/editor/assets/pages/form-validation/validate.js"></script>
+    <script type="text/javascript" src="/tb_bdl/editor/assets/pages/form-validation/form-validation.js"></script>
+
 
     <script src="/tb_bdl/editor/assets/js/pcoded.min.js"></script>
     <script src="/tb_bdl/editor/assets/js/vartical-layout.min.js"></script>
