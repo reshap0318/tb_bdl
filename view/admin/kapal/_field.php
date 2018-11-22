@@ -15,7 +15,19 @@
   <div class="form-group row">
       <label class="col-sm-2 col-form-label">Jenis Kapal</label>
       <div class="col-sm-10">
-          <input type="text" class="form-control" value="<?php echo $perulangan['id_jenis_kapal']; ?>" id="id_jenis_kapal" name="id_jenis_kapal" placeholder="Jenis Kapal">
+          <select class="form-control js-example-basic-hide-search" name="id_jenis_kapal">
+            <?php
+              $sql = "SELECT id_jenis_kapal, nama from jenis_kapal";
+              $eksekusi = pg_query($sql);
+              while ($data = pg_fetch_assoc($eksekusi)) {
+                if($data['id_jenis_kapal'] == $perulangan['id_jenis_kapal']){
+                  echo '<option value="'.$data['id_jenis_kapal'].'" selected>'.$data['nama'].'</option>';
+                }else{
+                  echo '<option value="'.$data['id_jenis_kapal'].'">'.$data['nama'].'</option>';
+                }
+              }
+            ?>
+          </select>
           <span class="messages popover-valid"></span>
       </div>
   </div>
@@ -68,7 +80,15 @@
 <div class="form-group row">
     <label class="col-sm-2 col-form-label">Jenis Kapal</label>
     <div class="col-sm-10">
-        <input type="text" class="form-control" id="id_jenis_kapal" name="id_jenis_kapal" placeholder="Jenis Kapal">
+        <select class="js-example-basic-single col-sm-12" name="id_jenis_kapal">
+          <?php
+            $sql = "SELECT id_jenis_kapal, nama from jenis_kapal";
+            $eksekusi = pg_query($sql);
+            while ($data = pg_fetch_assoc($eksekusi)) {
+              echo '<option value="'.$data['id_jenis_kapal'].'">'.$data['nama'].'</option>';
+            }
+          ?>
+        </select>
         <span class="messages popover-valid"></span>
     </div>
 </div>

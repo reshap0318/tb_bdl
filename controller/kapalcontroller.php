@@ -60,7 +60,7 @@
 
 //logika untuk ajak table
     if($aksi = 'table'){
-      $sql = "SELECT kapal.id_kapal, kapal.nama as namakapal, count(abk.id_abk) as jabk, count(alat_tangkap_kapal.id_kapal) jalat,jenis_kapal.nama as jenis, tanda_selar, mesin, panjang, berat_kotor, pemilik.nama as pemilik FROM public.kapal left join jenis_kapal on kapal.id_jenis_kapal = jenis_kapal.id_jenis_kapal left join abk on kapal.id_kapal = abk.id_kapal left join alat_tangkap_kapal on kapal.id_kapal = alat_tangkap_kapal.id_kapal left join kepemilikan_kapal on kapal.id_kapal = kepemilikan_kapal.id_kapal left join pemilik on kepemilikan_kapal.id_pemilik = pemilik.id_pemilik group by kapal.id_kapal, jenis, alat_tangkap_kapal.id_kapal, pemilik.nama";
+      $sql = "SELECT kapal.id_kapal, kapal.nama as namakapal, count(abk.id_abk) as jabk, count(alat_tangkap_kapal.id_kapal) jalat,jenis_kapal.nama as jenis, tanda_selar, mesin, panjang, berat_kotor, count(pemilik.nama) as pemilik FROM public.kapal left join jenis_kapal on kapal.id_jenis_kapal = jenis_kapal.id_jenis_kapal left join abk on kapal.id_kapal = abk.id_kapal left join alat_tangkap_kapal on kapal.id_kapal = alat_tangkap_kapal.id_kapal left join kepemilikan_kapal on kapal.id_kapal = kepemilikan_kapal.id_kapal left join pemilik on kepemilikan_kapal.id_pemilik = pemilik.id_pemilik group by kapal.id_kapal, jenis, alat_tangkap_kapal.id_kapal";
       $eksekusi = pg_query($sql);
       $data = array();
       $no = 0;

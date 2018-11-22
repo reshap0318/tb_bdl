@@ -84,28 +84,28 @@ Jabatan
             extend: 'copy',
             className: 'btn-inverse',
             exportOptions: {
-                columns: [0, 1]
+                columns: [0, 1, 2]
             }
         },
         {
             extend: 'print',
             className: 'btn-inverse',
             exportOptions: {
-                columns: [0, 1]
+                columns: [0, 1, 2]
             }
         },
         {
             extend: 'excel',
             className: 'btn-inverse',
             exportOptions: {
-                columns: [0, 1]
+                columns: [0, 1, 2]
             }
         },
         {
             extend: 'pdf',
             className: 'btn-inverse',
             exportOptions: {
-                columns: [0, 1]
+                columns: [0, 1, 2]
             }
         }]
       });

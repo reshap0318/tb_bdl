@@ -23,13 +23,15 @@
     $aksi = $_GET['aksi'];
   }
 
+  // die("ST_GeomFromText('MULTIPOLYGON($geom)')");
+
   if($aksi=="create" || $aksi=="update" || $aksi=="delete"){
     if($aksi=="create"){
       $sql = "INSERT into kabkota(nama, geom) values ('$nama', ST_GeomFromText('MULTIPOLYGON($geom)'))";
-    }else if($aksi == "update" && isset($_POST['id'])){
+    }else if($aksi == "update" && isset($_POST['id_kabkot'])){
       $sql = "UPDATE kabkota SET nama='$nama', geom=ST_GeomFromText('MULTIPOLYGON($geom)') WHERE id_kabkot='$id'";
-    }else if($aksi == "delete" && isset($_POST['id'])){
-      $sql = "DELETE from kabkota where id_kabkot='$id'";
+    }else if($aksi == "delete" && isset($_POST['id_kabkot'])){
+      $sql = "DELETE from kabkota where id_kabkot=$id";
     }
     // die(var_dump(['<br>Link :'.$link.'<br>ID :'.$id.'<br>NAMA :'.$nama.'<br>GEOM :'.$geom.'<br>SQL :'.$sql.'<br>']));
     $eksekusi = pg_query($sql);
@@ -43,10 +45,6 @@
 
       header('location:'.$link);
   }
-
-
-
-
 
 
   if($aksi=="layerindex"){
@@ -69,6 +67,18 @@
         }
 
         echo json_encode($hasil);
-
   }
+
+  if($aksi == 'detailpeta' && isset($_GET['id'])){
+    $id = $_GET['id'];
+    $sql = "SELECT row_to_json(fc) FROM (SELECT 'FeatureCollection' As type, array_to_json(array_agg(f)) As features FROM (SELECT 'Feature' As type , ST_AsGeoJSON(loc.geom)::json As geometry , row_to_json((SELECT l FROM (SELECT id_kabkot as id,nama, row_to_json((SELECT k FROM (SELECT ST_X(ST_CENTROID(geom)) AS lng, ST_Y(ST_CENTROID(geom)) AS lat) AS k)) AS center) As l )) As properties FROM kabkota As loc WHERE id_kabkot in ($id)) As f ) As fc";
+    $eksekusi = pg_query($sql);
+       while ($data = pg_fetch_assoc($eksekusi)) {
+         $load=$data['row_to_json'];
+         $tulis="loaddata(".$load.");";
+       }
+    echo $tulis;
+  }
+
+
 ?>

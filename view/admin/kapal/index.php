@@ -67,7 +67,7 @@ Kapal
             '</tr>' +
             '<tr>' +
             '<td>Pemilik  </td>' +
-            '<td>'+ d.pemilik +'</td>' +
+            '<td>'+ d.pemilik +' Orang</td>' +
             '<td>Panjang  </td>' +
             '<td>' + d.panjang + ' M </td>' +
             '</tr>' +

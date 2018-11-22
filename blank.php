@@ -23,6 +23,13 @@
     <link rel="stylesheet" type="text/css" href="/tb_bdl/editor/assets/icon/icofont/css/icofont.css">
     <!-- feather Awesome -->
     <link rel="stylesheet" type="text/css" href="/tb_bdl/editor/assets/icon/feather/css/feather.css">
+    <!-- Range slider css -->
+    <link rel="stylesheet" type="text/css" href="/tb_bdl/editor/bower_components/seiyria-bootstrap-slider/css/bootstrap-slider.css">
+    <!-- Select 2 css -->
+    <link rel="stylesheet" href="/tb_bdl/editor/bower_components/select2/css/select2.min.css"/>
+    <!-- Multi Select css -->
+    <link rel="stylesheet" type="text/css" href="/tb_bdl/editor/bower_components/bootstrap-multiselect/css/bootstrap-multiselect.css"/>
+    <link rel="stylesheet" type="text/css" href="/tb_bdl/editor/bower_components/multiselect/css/multi-select.css"/>
     <!--forms-wizard css-->
     <link rel="stylesheet" type="text/css" href="/tb_bdl/editor/bower_components/jquery.steps/css/jquery.steps.css">
     <!-- Data Table Css -->
@@ -167,21 +174,59 @@
                                     <span class="pcoded-mtext">Jabatan</span>
                                 </a>
                             </li>
-                        </ul>
-                        <ul class="pcoded-item pcoded-left-item">
                             <li class="">
                                 <a href="http://localhost/tb_bdl/view/admin/kapal">
                                     <span class="pcoded-micon"><i class="fa fa-ship"></i></span>
                                     <span class="pcoded-mtext">Kapal</span>
                                 </a>
                             </li>
-                        </ul>
-                        <ul class="pcoded-item pcoded-left-item">
                             <li class="">
                                 <a href="http://localhost/tb_bdl/view/admin/kabkot">
                                     <span class="pcoded-micon"><i class="ti-map-alt"></i></span>
                                     <span class="pcoded-mtext">Kabupaten Kota</span>
                                 </a>
+                            </li>
+                            <li class="">
+                                <a href="http://localhost/tb_bdl/view/admin/kub">
+                                    <span class="pcoded-micon"><i class="fa fa-home"></i></span>
+                                    <span class="pcoded-mtext">Kelompok Usaha Bersama</span>
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="pcoded-navigatio-lavel">Fungsional</div>
+                        <ul class="pcoded-item pcoded-left-item">
+                            <li class="pcoded-hasmenu ">
+                                <a href="javascript:void(0)">
+                                    <span class="pcoded-micon"><i class="icofont icofont-document-folder"></i></span>
+                                    <span class="pcoded-mtext">Aldo</span>
+                                </a>
+                                <ul class="pcoded-submenu">
+                                    <li class="">
+                                        <a href="/tb_bdl/view/aldo/fung1/">
+                                            <span class="pcoded-mtext" >Fung 1</span>
+                                        </a>
+                                    </li>
+                                    <li class="">
+                                        <a href="javascript:void(0)">
+                                            <span class="pcoded-mtext" >Fung 2</span>
+                                        </a>
+                                    </li>
+                                    <li class="">
+                                        <a href="javascript:void(0)">
+                                            <span class="pcoded-mtext" >Fung 3</span>
+                                        </a>
+                                    </li>
+                                    <li class="">
+                                        <a href="javascript:void(0)">
+                                            <span class="pcoded-mtext" >Fung 4</span>
+                                        </a>
+                                    </li>
+                                    <li class="">
+                                        <a href="javascript:void(0)">
+                                            <span class="pcoded-mtext" >Fung 5</span>
+                                        </a>
+                                    </li>
+                                </ul>
                             </li>
                         </ul>
                     </div>
@@ -308,6 +353,16 @@
     <script type="text/javascript" src="/tb_bdl/editor/bower_components/i18next-xhr-backend/js/i18nextXHRBackend.min.js"></script>
     <script type="text/javascript" src="/tb_bdl/editor/bower_components/i18next-browser-languagedetector/js/i18nextBrowserLanguageDetector.min.js"></script>
     <script type="text/javascript" src="/tb_bdl/editor/bower_components/jquery-i18next/js/jquery-i18next.min.js"></script>
+    <!-- range slider js -->
+    <script type="text/javascript" src="/tb_bdl/editor/bower_components/seiyria-bootstrap-slider/js/bootstrap-slider.js"></script>
+
+
+    <!-- Select 2 js -->
+    <script type="text/javascript" src="/tb_bdl/editor/bower_components/select2/js/select2.full.min.js"></script>
+    <!-- Multiselect js -->
+    <script type="text/javascript" src="/tb_bdl/editor/bower_components/bootstrap-multiselect/js/bootstrap-multiselect.js"></script>
+    <script type="text/javascript" src="/tb_bdl/editor/bower_components/multiselect/js/jquery.multi-select.js"></script>
+    <script type="text/javascript" src="/tb_bdl/editor/assets/js/jquery.quicksearch.js"></script>
 
     <!-- data-table js -->
     <script src="/tb_bdl/editor/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
@@ -344,6 +399,9 @@
     <script type="text/javascript" src="/tb_bdl/editor/assets/pages/form-validation/form-validation.js"></script>
 
 
+    <!-- Custom js -->
+    <script type="text/javascript" src="/tb_bdl/editor/assets/pages/range-slider.js"></script>
+    <script type="text/javascript" src="/tb_bdl/editor/assets/pages/advance-elements/select2-custom.js"></script>
     <script src="/tb_bdl/editor/assets/js/pcoded.min.js"></script>
     <script src="/tb_bdl/editor/assets/js/vartical-layout.min.js"></script>
     <script src="/tb_bdl/editor/assets/js/jquery.mCustomScrollbar.concat.min.js"></script>
