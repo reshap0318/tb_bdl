@@ -6,6 +6,11 @@
 <head>
     <title>TB Kelompok 9 | <?php startblock('title') ?><?php endblock() ?></title>
 
+    <style type="text/css">
+        .sembunyi{
+          display: none;
+        }
+    </style>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -23,6 +28,16 @@
     <link rel="stylesheet" type="text/css" href="/tb_bdl/editor/assets/icon/icofont/css/icofont.css">
     <!-- feather Awesome -->
     <link rel="stylesheet" type="text/css" href="/tb_bdl/editor/assets/icon/feather/css/feather.css">
+    <!-- Date-time picker css -->
+    <link rel="stylesheet" type="text/css" href="/tb_bdl/editor/assets/pages/advance-elements/css/bootstrap-datetimepicker.css">
+    <!-- Date-range picker css  -->
+    <link rel="stylesheet" type="text/css" href="/tb_bdl/editor/bower_components/bootstrap-daterangepicker/css/daterangepicker.css" />
+    <!-- Date-Dropper css -->
+    <link rel="stylesheet" type="text/css" href="/tb_bdl/editor/bower_components/datedropper/css/datedropper.min.css" />
+    <!-- Color Picker css -->
+    <link rel="stylesheet" type="text/css" href="/tb_bdl/editor/bower_components/spectrum/css/spectrum.css" />
+    <!-- Mini-color css -->
+    <link rel="stylesheet" type="text/css" href="/tb_bdl/editor/bower_components/jquery-minicolors/css/jquery.minicolors.css" />
     <!-- Range slider css -->
     <link rel="stylesheet" type="text/css" href="/tb_bdl/editor/bower_components/seiyria-bootstrap-slider/css/bootstrap-slider.css">
     <!-- Select 2 css -->
@@ -202,12 +217,12 @@
                                 </a>
                                 <ul class="pcoded-submenu">
                                     <li class="">
-                                        <a href="/tb_bdl/view/aldo/fung1/">
+                                        <a href="http://localhost/tb_bdl/view/aldo/fung1/">
                                             <span class="pcoded-mtext" >Fung 1</span>
                                         </a>
                                     </li>
                                     <li class="">
-                                        <a href="javascript:void(0)">
+                                        <a href="http://localhost/tb_bdl/view/aldo/fung2/">
                                             <span class="pcoded-mtext" >Fung 2</span>
                                         </a>
                                     </li>
@@ -342,6 +357,20 @@
     <script type="text/javascript" src="/tb_bdl/editor/bower_components/modernizr/js/modernizr.js"></script>
     <script type="text/javascript" src="/tb_bdl/editor/bower_components/modernizr/js/css-scrollbars.js"></script>
 
+    <!-- Bootstrap date-time-picker js -->
+    <script type="text/javascript" src="/tb_bdl/editor/assets/pages/advance-elements/moment-with-locales.min.js"></script>
+    <script type="text/javascript" src="/tb_bdl/editor/bower_components/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+    <script type="text/javascript" src="/tb_bdl/editor/assets/pages/advance-elements/bootstrap-datetimepicker.min.js"></script>
+    <!-- Date-range picker js -->
+    <script type="text/javascript" src="/tb_bdl/editor/bower_components/bootstrap-daterangepicker/js/daterangepicker.js"></script>
+    <!-- Date-dropper js -->
+    <script type="text/javascript" src="/tb_bdl/editor/bower_components/datedropper/js/datedropper.min.js"></script>
+    <!-- Color picker js -->
+    <script type="text/javascript" src="/tb_bdl/editor/bower_components/spectrum/js/spectrum.js"></script>
+    <script type="text/javascript" src="/tb_bdl/editor/bower_components/jscolor/js/jscolor.js"></script>
+    <!-- Mini-color js -->
+    <script type="text/javascript" src="/tb_bdl/editor/bower_components/jquery-minicolors/js/jquery.minicolors.min.js"></script>
+
     <!-- Masking js -->
     <script src="/tb_bdl/editor/assets/pages/form-masking/inputmask.js"></script>
     <script src="/tb_bdl/editor/assets/pages/form-masking/jquery.inputmask.js"></script>
@@ -400,6 +429,7 @@
 
 
     <!-- Custom js -->
+    <script type="text/javascript" src="/tb_bdl/editor/assets/pages/advance-elements/custom-picker.js"></script>
     <script type="text/javascript" src="/tb_bdl/editor/assets/pages/range-slider.js"></script>
     <script type="text/javascript" src="/tb_bdl/editor/assets/pages/advance-elements/select2-custom.js"></script>
     <script src="/tb_bdl/editor/assets/js/pcoded.min.js"></script>
