@@ -11,9 +11,9 @@ include $_SERVER['DOCUMENT_ROOT'].'/tb_bdl/controller/koneksi.php';
     if(isset($_GET['pencarian'])){
       $pencarian = $_GET['pencarian'];
       $pencarian = date('Y-m-d', strtotime($pencarian));
-      $sql = "SELECT DISTINCT pelayaran.id_pelayaran, kapal.id_kapal, kapal.nama as namakapal, count(abk.id_abk) as jabk, count(alat_tangkap_kapal.id_kapal) jalat,jenis_kapal.nama as jenis, tanda_selar, mesin, panjang, berat_kotor, count(pemilik.nama) as pemilik FROM public.kapal left join jenis_kapal on kapal.id_jenis_kapal = jenis_kapal.id_jenis_kapal left join abk on kapal.id_kapal = abk.id_kapal left join alat_tangkap_kapal on kapal.id_kapal = alat_tangkap_kapal.id_kapal left join kepemilikan_kapal on kapal.id_kapal = kepemilikan_kapal.id_kapal left join pemilik on kepemilikan_kapal.id_pemilik = pemilik.id_pemilik left join pelayaran on pelayaran.id_kapal = kapal.id_kapal where pelayaran.tanggal_keluar = '$pencarian' group by kapal.id_kapal, jenis, alat_tangkap_kapal.id_kapal, pelayaran.id_pelayaran";
+      $sql = "SELECT DISTINCT pelayaran.id_pelayaran, pelayaran.id_kapal, kapal.nama as namakapal, kapal.tanda_selar, kapal.mesin, kapal.panjang, kapal.berat_kotor, jenis_kapal.nama as jeniskapal, tanggal_keluar, count(alat_tangkap_kapal.*) as jmlhalattgkp, count(keterangan_pelayaran_abk.*) as jabk, count(pemilik.*) as jmlhpemilik,administrasi, tujuan, pelayaran.geom FROM pelayaran left join kapal on pelayaran.id_kapal = kapal.id_kapal left join jenis_kapal on kapal.id_jenis_kapal = jenis_kapal.id_jenis_kapal left join alat_tangkap_kapal on kapal.id_kapal = alat_tangkap_kapal.id_kapal left join keterangan_pelayaran_abk on pelayaran.id_pelayaran = keterangan_pelayaran_abk.id_pelayaran left join kepemilikan_kapal on kepemilikan_kapal.id_kapal = kapal.id_kapal left join pemilik on kepemilikan_kapal.id_pemilik = pemilik.id_pemilik where tanggal_keluar = '$pencarian' group by pelayaran.id_pelayaran, kapal.nama, jenis_kapal.nama, kapal.tanda_selar, kapal.mesin, kapal.panjang, kapal.berat_kotor";
     }else{
-      $sql = "SELECT DISTINCT pelayaran.id_pelayaran, kapal.id_kapal, kapal.nama as namakapal, count(abk.id_abk) as jabk, count(alat_tangkap_kapal.id_kapal) jalat,jenis_kapal.nama as jenis, tanda_selar, mesin, panjang, berat_kotor, count(pemilik.nama) as pemilik FROM public.kapal left join jenis_kapal on kapal.id_jenis_kapal = jenis_kapal.id_jenis_kapal left join abk on kapal.id_kapal = abk.id_kapal left join alat_tangkap_kapal on kapal.id_kapal = alat_tangkap_kapal.id_kapal left join kepemilikan_kapal on kapal.id_kapal = kepemilikan_kapal.id_kapal left join pemilik on kepemilikan_kapal.id_pemilik = pemilik.id_pemilik left join pelayaran on pelayaran.id_kapal = kapal.id_kapal group by kapal.id_kapal, jenis, alat_tangkap_kapal.id_kapal, pelayaran.id_pelayaran";
+      $sql = "SELECT DISTINCT pelayaran.id_pelayaran, pelayaran.id_kapal, kapal.nama as namakapal, kapal.tanda_selar, kapal.mesin, kapal.panjang, kapal.berat_kotor, jenis_kapal.nama as jeniskapal, tanggal_keluar, count(alat_tangkap_kapal.*) as jmlhalattgkp, count(keterangan_pelayaran_abk.*) as jabk, count(pemilik.*) as jmlhpemilik,administrasi, tujuan, pelayaran.geom FROM pelayaran left join kapal on pelayaran.id_kapal = kapal.id_kapal left join jenis_kapal on kapal.id_jenis_kapal = jenis_kapal.id_jenis_kapal left join alat_tangkap_kapal on kapal.id_kapal = alat_tangkap_kapal.id_kapal left join keterangan_pelayaran_abk on pelayaran.id_pelayaran = keterangan_pelayaran_abk.id_pelayaran left join kepemilikan_kapal on kepemilikan_kapal.id_kapal = kapal.id_kapal left join pemilik on kepemilikan_kapal.id_pemilik = pemilik.id_pemilik group by pelayaran.id_pelayaran, kapal.nama, jenis_kapal.nama, kapal.tanda_selar, kapal.mesin, kapal.panjang, kapal.berat_kotor";
     }
     $eksekusi = pg_query($sql);
     $data = array();
@@ -33,9 +33,9 @@ include $_SERVER['DOCUMENT_ROOT'].'/tb_bdl/controller/koneksi.php';
 
     if(isset($_GET['pencarian'])){
       $pencarian = $_GET['pencarian'];
-      $sql = "Select *, ST_asgeojson(geom) AS geometry, st_x(st_centroid(geom)) as lng, st_y(st_centroid(geom)) as lat from pelayaran where id_pelayaran = '$pencarian'";
+      $sql = "Select *, kapal.nama as namakapal, ST_asgeojson(geom) AS geometry, st_x(st_centroid(geom)) as lng, st_y(st_centroid(geom)) as lat from pelayaran left join kapal on pelayaran.id_kapal = kapal.id_kapal where id_pelayaran = '$pencarian'";
     }else{
-      $sql = "Select *, ST_asgeojson(geom) AS geometry, st_x(st_centroid(geom)) as lng, st_y(st_centroid(geom)) as lat from pelayaran";
+      $sql = "Select *, kapal.nama as namakapal, ST_asgeojson(geom) AS geometry, st_x(st_centroid(geom)) as lng, st_y(st_centroid(geom)) as lat from pelayaran left join kapal on pelayaran.id_kapal = kapal.id_kapal";
     }
     $eksekusi = pg_query($sql);
     $hasil = array(
@@ -50,7 +50,7 @@ include $_SERVER['DOCUMENT_ROOT'].'/tb_bdl/controller/koneksi.php';
         'geometry' => json_decode($data['geometry']),
         'properties' => array(
           'id' => $data['id_pelayaran'],
-          'tujuan' => $data['tujuan'],
+          'namakapal' => $data['namakapal'],
           'lon' => $data['lng'],
           'lat' => $data['lat'],
          )
@@ -63,15 +63,15 @@ include $_SERVER['DOCUMENT_ROOT'].'/tb_bdl/controller/koneksi.php';
 
   }else if($aksi == 'cari'){
     $pencarian = $_GET['pencarian'];
-    $sql = "Select *, st_x(st_centroid(geom)) as lng, st_y(st_centroid(geom)) as lat from pelayaran where id_pelayaran = '$pencarian'";
+    $sql = "Select *, kapal.nama as namakapal, ST_asgeojson(geom) AS geometry, st_x(st_centroid(geom)) as lng, st_y(st_centroid(geom)) as lat from pelayaran left join kapal on pelayaran.id_kapal = kapal.id_kapal where id_pelayaran = '$pencarian'";
     $eksekusi = pg_query($sql);
     while($row = pg_fetch_array($eksekusi))
     {
           $id=$row['id_pelayaran'];
-          $tujuan=$row['tujuan'];
+          $nama=$row['nama'];
           $longitude=$row['lng'];
           $latitude=$row['lat'];
-          $dataarray[]=array('id'=>$id, 'tujuan'=>$tujuan, 'longitude'=>$longitude,'latitude'=>$latitude);
+          $dataarray[]=array('id'=>$id, 'nama'=>$nama, 'longitude'=>$longitude,'latitude'=>$latitude);
     }
     echo json_encode ($dataarray);
 
@@ -105,11 +105,11 @@ include $_SERVER['DOCUMENT_ROOT'].'/tb_bdl/controller/koneksi.php';
     while($row = pg_fetch_array($eksekusi))
     {
           $id=$row['id_abk'];
-          $jabatan=$row['jabatan'];
+          $nama=$row['nama'];
           $kebangsaan=$row['kebangsaan'];
           $longitude=$row['lng'];
           $latitude=$row['lat'];
-          $dataarray[]=array('id'=>$id, 'kebangsaan'=>$kebangsaan,'jabatan'=>$jabatan,  'longitude'=>$longitude,'latitude'=>$latitude);
+          $dataarray[]=array('id'=>$id, 'kebangsaan'=>$kebangsaan,'nama'=>$nama,  'longitude'=>$longitude,'latitude'=>$latitude);
     }
     echo json_encode ($dataarray);
 

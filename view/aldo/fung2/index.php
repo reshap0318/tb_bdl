@@ -84,13 +84,13 @@ Aldo Fungsional : 2
             '</tr>' +
             '<tr>' +
             '<td>Jenis Kapal  </td>' +
-            '<td>' + d.jenis + '</td>' +
+            '<td>' + d.jeniskapal + '</td>' +
             '<td>Jumlah Alat Tangkap  </td>' +
-            '<td>' + d.jalat + ' Buah </td>' +
+            '<td>' + d.jmlhalattgkp + ' Buah </td>' +
             '</tr>' +
             '<tr>' +
             '<td>Pemilik  </td>' +
-            '<td>'+ d.pemilik +' Orang</td>' +
+            '<td>'+ d.jmlhpemilik +' Orang</td>' +
             '<td>Tanda Selar  </td>' +
             '<td>' + d.tanda_selar + '</td>' +
             '</tr>' +
@@ -109,7 +109,7 @@ Aldo Fungsional : 2
             '<a href="#abk" onclick="cariabk('+d.id_kapal+')" class="btn btn-primary btn-mini waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="Tampilkan Lokasi Rumah Anak Buah Kapal ini"><i class="fa fa-user-secret"></i></a>'+
             '</td>' +
             '</tr>' +
-  -          '</table>';
+            '</table>';
     }
 
     var ct = $('#table-f2').DataTable({
@@ -121,7 +121,7 @@ Aldo Fungsional : 2
                 "defaultContent": ''
             },
             { "data": "namakapal"},
-            { "data": "jenis" },
+            { "data": "jeniskapal" },
             { "data": "mesin" },
         ],
         "order": [

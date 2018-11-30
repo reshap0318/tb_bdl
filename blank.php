@@ -227,7 +227,7 @@
                                         </a>
                                     </li>
                                     <li class="">
-                                        <a href="javascript:void(0)">
+                                        <a href="http://localhost/tb_bdl/view/aldo/fung3/">
                                             <span class="pcoded-mtext" >Fung 3</span>
                                         </a>
                                     </li>

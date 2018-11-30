@@ -23,7 +23,7 @@
     $aksi = $_GET['aksi'];
   }
 
-  // die("ST_GeomFromText('MULTIPOLYGON($geom)')");
+  die("ST_GeomFromText('MULTIPOLYGON($geom)')");
 
   if($aksi=="create" || $aksi=="update" || $aksi=="delete"){
     if($aksi=="create"){

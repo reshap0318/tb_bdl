@@ -1,40 +1,36 @@
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBNnzxae2AewMUN0Tt_fC3gN38goeLVdVE"></script>
 <script type="text/javascript">
 var pos ='null';
-var circles=[];
 var info_windows = [];
-var server = "http://localhost/tb_bdl/controller/aldocontroller/fung2controller.php?aksi=";
+var server = "http://localhost/tb_bdl/controller/aldocontroller/fung3controller.php?aksi=";
 var markers = [];
 var layer = [];
 var directionsDisplay;
-var rute = [];  //NAVIGASI
-var angkot = [];
 var centerBaru;
 var jalurAngkot=[];
 var centerLokasi; //untuk fungsi CallRoute()
 
 window.onload = function() {
   basemap();
-  // pelayaran();
-  // semuakapal();
 };
 
-function daerahpelayaran(id) {
-  if(id==null){
-    alert('Kapal Belum Melakukan Pelayaran, Rute Pelayaran Kapal Belum Ada');
-  }else{
+function lokasi(id) {
+  //untuk menampilkan map pakai kodingan di bawah ini
     document.getElementById('map').classList.remove("sembunyi");
-    pelayaran(id);
-    detaillokasipelayaran(id);
-  }
-
+ //untuk menampilkan lokasi KUB
+ layerkub(id);
+ detaillokasikub(id);
+ //untuk menghiilangkan table usaha dan transaksi
+ document.getElementById("table_usaha").classList.add('sembunyi');
+ document.getElementById("table_transaksi").classList.add('sembunyi');
 }
 
-function pelayaran(id) //tampil digitasi kapal, tampilkan saja 1 table, disiko wak cuman menampilkan table pelayaran, karna yang memiliki geomnyo
+
+function layerkub(id)
 {
-    abk = new google.maps.Data();
-    abk.loadGeoJson(server+'layer&pencarian='+id);
-    abk.setStyle(function(feature){
+    kub = new google.maps.Data();
+    kub.loadGeoJson(server+'layer&pencarian='+id);
+    kub.setStyle(function(feature){
         return({
             fillColor: '#F0FFFF',
             strokeColor: '#000000',
@@ -42,11 +38,9 @@ function pelayaran(id) //tampil digitasi kapal, tampilkan saja 1 table, disiko w
             fillOpacity: 7
         });
     });
-    layer.push(abk);
-    for (var i = 0; i < layer.length; i++) {
-      layer[i].setMap(null);
-    }
-    abk.setMap(map);
+    layer.push(kub);
+    hapuslayer();
+    kub.setMap(map);
 }
 
 function basemap(){
@@ -57,6 +51,11 @@ function basemap(){
   });
 }
 
+function hapuslayer() {
+  for (var i = 0; i < layer.length; i++) {
+    layer[i].setMap(null);
+  }
+}
 
 function hapusInfo() {
   for (var i = 0; i < info_windows.length; i++) {
@@ -70,14 +69,14 @@ function hapusmarker() {
   }
 }
 
-function detaillokasipelayaran(id) {
-  $.ajax({ url: server+'cari&pencarian='+id, data: "", dataType: 'json', success: function (rows){
+function detaillokasikub(id) {
+  $.ajax({ url: server+'detaillokasikub&pencarian='+id, data: "", dataType: 'json', success: function (rows){
     console.log(rows);
-    tampilkanmappelayaran(rows);
+    tampilkanmapkub(rows);
   }});
 }
 
-function tampilkanmappelayaran(rows) {
+function tampilkanmapkub(rows) {
   hapusInfo();
   hapusmarker();
   if(rows==null){
@@ -86,9 +85,8 @@ function tampilkanmappelayaran(rows) {
   for (var i in rows)
   {
     var row = rows[i];
-    // console.log(row);
-    var id = row.id;
-    var kapal = row.nama;
+    var nama = row.nama;
+    var alamat = row.alamat;
     var latitude = row.latitude ;
     var longitude = row.longitude ;
     centerBaru = new google.maps.LatLng(latitude, longitude);
@@ -98,18 +96,18 @@ function tampilkanmappelayaran(rows) {
       map: map,
       animation: google.maps.Animation.DROP,
     });
+    var katanya = '<div style="height:auto; width: 200px" class="text-center">Usaha ' +nama+ '<br>'+alamat+'</div>';
     // console.log(id);
     // console.log(latitude);
     // console.log(longitude);
-    kapal = 'Lokasi Pelayaran Kapal "'+kapal+'"'
     markers.push(marker);
     map.setCenter(centerBaru);
-    infowindowslokasipelayaran(kapal, centerBaru);
-    map.setZoom(14);
+    infowindowslokasikub(katanya, centerBaru);
+    map.setZoom(18);
   }
 }
 
-function infowindowslokasipelayaran(tujuan, center) {
+function infowindowslokasikub(tujuan, center) {
   google.maps.event.addListener(marker, "click", function(){
     infowindow = new google.maps.InfoWindow({
       position: center,
@@ -122,13 +120,13 @@ function infowindowslokasipelayaran(tujuan, center) {
   });
 }
 
-function lokasiabk() {
-  $('#abk tbody').on( 'click', '#lokasi', function () {
+function lokasiusaha() {
+  $('#usaha tbody').on( 'click', '#lokasi', function () {
         var datanya = $(this).closest("tr")[0];
         console.log( datanya.children[0].innerHTML );
         id = datanya.children[0].innerHTML;
 
-      $.ajax({ url: server+'cariabk&pencarian='+id, data: "", dataType: 'json', success: function (rows){
+      $.ajax({ url: server+'cariusaha&pencarian='+id, data: "", dataType: 'json', success: function (rows){
         console.log(rows);
         hapusInfo();
         hapusmarker();
@@ -138,10 +136,7 @@ function lokasiabk() {
         for (var i in rows)
         {
           var row = rows[i];
-          var id = row.id;
-          var nama = row.nama;
-          var jabatan = row.jabatan;
-          var kebangsaan = row.kebangsaan;
+          var nama = 'Lokasi Usaha '+row.nama;
           var latitude = row.latitude ;
           var longitude = row.longitude ;
           centerBaru = new google.maps.LatLng(latitude, longitude);
@@ -151,14 +146,10 @@ function lokasiabk() {
             map: map,
             animation: google.maps.Animation.DROP,
           });
-          // console.log(id);
-          // console.log(latitude);
-          // console.log(longitude);
-          nama = 'Rumah '+nama;
           markers.push(marker);
           map.setCenter(centerBaru);
-          infowindowslokasipelayaran(nama, centerBaru);
-          map.setZoom(16);
+          infowindowslokasikub(nama, centerBaru);
+          map.setZoom(18);
           document.getElementById('map').classList.remove("sembunyi");
         }
       }});
