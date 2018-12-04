@@ -1,14 +1,14 @@
 <?php include $_SERVER['DOCUMENT_ROOT'].'/tb_bdl/blank.php'; ?>
 
-<?php startblock('title') ?> Aldo Fungsional : 1 <?php endblock() ?>
+<?php startblock('title') ?> Icha Fungsional : 1 <?php endblock() ?>
 
 <?php startblock('breadcrumb-link') ?>
-<li class="breadcrumb-item"><a href="#!">Aldo</a>
+<li class="breadcrumb-item"><a href="#!">Icha</a>
 <li class="breadcrumb-item"><a href="#!">Fungsional : 1</a>
 <?php endblock() ?>
 
 <?php startblock('breadcrumb-title') ?>
-Aldo Fungsional : 1
+Icha Fungsional : 1
 <?php endblock() ?>
 
 <?php startblock('content') ?>
@@ -19,9 +19,9 @@ Aldo Fungsional : 1
     </div>
     <div class="card-block user-desc">
         <div class="view-desc">
-            <p>fungsional : Menampilkan detail abk seperti nama, jabatan, kapal yg dipakai abk, kebangsaan berdasarkan jenis tangkapan<br>
+            <p>Fungsional Ini Berfungsi untuk mengetahui Lokasi-lokasi kecamatan beserta kabupaten kota dari usaha perikanan yang nantinya akan meliputi KUB dari usaha perikanan tersebut, jenis dari usaha perikanan, transaksi beserta detail transaksi dan juga produksi berdasarkan jenis tangkapam.<br>
                Sehingga Fungsional Ini Mempermudah atau Membantu orang - orang untuk bertanya kesumbernya(awak yang menangkap ikan tadi) seperti tentang kondisi lautan, kondisi lokasi ikan banyak, dllnya.<br>
-               <font style="color:green">Aplikasi ini terdiri dari 7 table, yaitu table abk, jabatan, kebangsaan, kapal, pelayaran, produksi, jenis_tangkapan</font>
+               <font style="color:green">Aplikasi ini terdiri dari  table, yaitu table abk, jabatan, kebangsaan, kapal, pelayaran, produksi, jenis_tangkapan</font>
             </p>
         </div>
     </div>
@@ -51,16 +51,17 @@ Aldo Fungsional : 1
 <!-- hasil pencarian -->
 <!-- table hasil -->
 <div class="card">
-  <div class="card-block">
+  <div class="card-block sembunyi" id="tableutama">
       <div class="dt-responsive table-responsive">
           <table id="table-f1" class="table table-striped table-bordered nowrap" style="width:100%">
               <thead>
                   <tr>
                       <th></th>
-                      <th>Nama</th>
-                      <th>Kebangsaan</th>
-                      <th>Jabatan</th>
-                      <th>Kapal</th>
+                      <th>Nama Usaha</th>
+                      <th>Jenis Usaha</th>
+                      <th>Nama KUB</th>
+                      <th>Jenis Tangkapan</th>
+                      <th>Tanggal Transaksi</th>
                   </tr>
               </thead>
           </table>
@@ -70,21 +71,8 @@ Aldo Fungsional : 1
 
 <div class="card">
   <div class="card-block">
-    <!-- <a href="javascript:void(0)" class="btn btn-info" role="button" data-toggle="collapse" onclick="aktifkanGeolocation()" title="Current Position"><i class="icofont icofont-social-google-map"></i></a>
-    <a href="javascript:void(0)" class="btn btn-info" role="button" data-toggle="collapse" onclick="manualLocation()" title=" Manual Position"><i class="icofont icofont-location-arrow"></i></a>
-    <a class="btn btn-info" role="button" data-toggle="collapse" href="#terdekat" title="Nearby" aria-controls="terdekat"><i class="icofont icofont-road"></i></a>
-    <label></label>
-    <div class="collapse" id="terdekat">
-      <div class="well">
-        <label><b>Radius&nbsp</b></label><label style="color:black" id="km"><b>0</b></label>&nbsp<label><b>m</b></label><br>
-        <input  type="range" onclick="cek();aktifkanRadius();resultt()" id="inputradiusmes" name="inputradiusmes" data-highlight="true" min="1" max="20" value="1" class="form-control">
-      </div>
-    </div>
-  </div> -->
-
   <div class="" id="map" style="width:100%; height:400px;">
-  <?php include $_SERVER['DOCUMENT_ROOT'].'/tb_bdl/view/aldo/fung1/map.php'; ?>
-
+  <?php include $_SERVER['DOCUMENT_ROOT'].'/tb_bdl/view/icha/fung1/map.php'; ?>
   </div>
 </div>
 <?php endblock() ?>
@@ -95,38 +83,45 @@ Aldo Fungsional : 1
           // `d` is the original data object for the row
           return '<table class="table table-striped table-bordered nowrap">' +
             '<tr>' +
-            '<td>ID Anak Buah Kapal  </td>' +
-            '<td>' + d.id_abk + '</td>' +
-            '<td>Jabatan  </td>' +
-            '<td>' + d.jabatan + '</td>' +
+              '<td>ID Usaha Perikanan  </td>' +
+              '<td>PRKNRSP0' + d.id_usaha + '</td>' +
+              '<td>Nama Usaha  </td>' +
+              '<td>' + d.nama_usaha + '</td>' +
             '</tr>' +
             '<tr>' +
-            '<td>Kebangsaan  </td>' +
-            '<td>' + d.kebangsaan + '</td>' +
-            '<td>Sertifikat  </td>' +
-            '<td>' + d.sertifikat + '</td>' +
-            '</tr>' +
-            '<tr>' +
-            '<td>Kapal  </td>' +
-            '<td>'+ d.kapal +'</td>' +
-            '<td>Aksi</td>' +
-            '<td><a href="javascript:void(0)" onclick="satuabk('+d.id_abk+')" class="btn btn-primary btn-mini waves-effect waves-light"><i class="fa fa-map-pin"></i></a></td>' +
+              '<td>Jenis Usaha  </td>' +
+              '<td>' + d.jenis_usaha + '</td>' +
+              '<td>Nama KUB  </td>' +
+              '<td>' + d.nama_kub + '</td>' +
+            '</tr>'+
+            '<tr>'+
+              '<td>Jenis Tangkapan  </td>' +
+              '<td>'+ d.jenis +'</td>' +
+              '<td>Tanggal Transaksi  </td>' +
+              '<td>'+ d.tanggal +'</td>' +
+            '</tr>'+
+            '<tr>'+
+              '<td></td>' +
+              '<td></td>' +
+              '<td>Aksi</td>' +
+              '<td><a href="javascript:void(0)" onclick="satuusaha('+d.id_usaha+')" class="btn btn-primary btn-mini waves-effect waves-light"><i class="fa fa-map-pin"></i></a></td>' +
             '</tr>' +
             '</table>';
     }
 
     var ct = $('#table-f1').DataTable({
-        "ajax": 'http://localhost/tb_bdl/controller/aldocontroller/fung1controller.php?aksi=tablef1',
+        "ajax": 'http://localhost/tb_bdl/controller/ichacontroller/fung1controller.php?aksi=tablef1',
         "columns": [{
                 "className": 'details-control',
                 "orderable": false,
                 "data": null,
                 "defaultContent": ''
             },
-            { "data": "namaabk"},
-            { "data": "kebangsaan" },
-            { "data": "jabatan" },
-            { "data": "kapal" }
+            { "data": "nama_usaha"},
+            { "data": "jenis_usaha" },
+            { "data": "nama_kub" },
+            { "data": "jenis_tangkapan" },
+            { "data": "tanggal" },
         ],
         "order": [
             [1, 'asc']
@@ -158,13 +153,14 @@ Aldo Fungsional : 1
           var cari = [];
           var select = document.getElementById("pencarian");
           if(select.selectedOptions.length==0){
-            var link = 'http://localhost/tb_bdl/controller/aldocontroller/fung1controller.php?aksi=tablef1';
+            var link = 'http://localhost/tb_bdl/controller/ichacontroller/fung1controller.php?aksi=tablef1';
           }else{
               for (var i=0; i < select.selectedOptions.length; i++) {
                   cari.push(select.selectedOptions[i].value);
               }
+            document.getElementById("tableutama").classList.remove('sembunyi');
             var id = cari.join(",");
-            var link = 'http://localhost/tb_bdl/controller/aldocontroller/fung1controller.php?aksi=tablef1&pencarian='+id;
+            var link = 'http://localhost/tb_bdl/controller/ichacontroller/fung1controller.php?aksi=tablef1&pencarian='+id;
           }
           console.log(link);
           ct.ajax.url(link).load();

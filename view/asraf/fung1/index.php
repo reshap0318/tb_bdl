@@ -1,14 +1,14 @@
 <?php include $_SERVER['DOCUMENT_ROOT'].'/tb_bdl/blank.php'; ?>
 
-<?php startblock('title') ?> Aldo Fungsional : 1 <?php endblock() ?>
+<?php startblock('title') ?> asraf Fungsional : 1 <?php endblock() ?>
 
 <?php startblock('breadcrumb-link') ?>
-<li class="breadcrumb-item"><a href="#!">Aldo</a>
+<li class="breadcrumb-item"><a href="#!">asraf</a>
 <li class="breadcrumb-item"><a href="#!">Fungsional : 1</a>
 <?php endblock() ?>
 
 <?php startblock('breadcrumb-title') ?>
-Aldo Fungsional : 1
+asraf Fungsional : 1
 <?php endblock() ?>
 
 <?php startblock('content') ?>
@@ -19,9 +19,9 @@ Aldo Fungsional : 1
     </div>
     <div class="card-block user-desc">
         <div class="view-desc">
-            <p>fungsional : Menampilkan detail abk seperti nama, jabatan, kapal yg dipakai abk, kebangsaan berdasarkan jenis tangkapan<br>
-               Sehingga Fungsional Ini Mempermudah atau Membantu orang - orang untuk bertanya kesumbernya(awak yang menangkap ikan tadi) seperti tentang kondisi lautan, kondisi lokasi ikan banyak, dllnya.<br>
-               <font style="color:green">Aplikasi ini terdiri dari 7 table, yaitu table abk, jabatan, kebangsaan, kapal, pelayaran, produksi, jenis_tangkapan</font>
+            <p>Fungsional Ini Berfungsi untuk mengetahui jenis kapal berdasarkan tanggal keluar dan pemilik kapal<br>
+               Sehingga Fungsional Ini dapat membantu untuk mengetahui jenis-jenis apa saja yang ada pada pelayaran dan yang dimiliki oleh pemilik<br>
+               <font style="color:green">Aplikasi ini terdiri dari 7 table, yaitu jenis_kapal, jabatan, kebangsaan, kapal, pelayaran, produksi, jenis_tangkapan</font>
             </p>
         </div>
     </div>
@@ -30,21 +30,27 @@ Aldo Fungsional : 1
 <div class="card">
   <div class="card-block">
     <div class="row">
-        <div class="col-sm-12">
-          <div class="input-group input-group-button">
-            <select name="pencarian[]" class="form-control js-example-basic-hide-search" multiple="multiple" id="pencarian">
-              <?php
-                include $_SERVER['DOCUMENT_ROOT'].'/tb_bdl/controller/koneksi.php';
-                $sql = "SELECT id_jenis_tangkapan, nama from jenis_tangkapan";
-                $eksekusi = pg_query($sql);
-                while ($data = pg_fetch_assoc($eksekusi)) {
-                  echo '<option value="'.$data['id_jenis_tangkapan'].'">'.$data['nama'].'</option>';
-                }
-              ?>
-            </select>
-            <button class="input-group-addon btn btn-primary" onclick="pencarian()" id="basic-addon10" type="submit"  name="cari">cari</button>
-          </div>
+        <div class="col-sm-5 m-b-t-30">
+          <select class="js-example-basic-single col-sm-12" id="pencarian1">
+                <option value="">-PILIH PEMILIK-</option>
+                <?php
+                  include $_SERVER['DOCUMENT_ROOT'].'/tb_bdl/controller/koneksi.php';
+                  $sql = "SELECT id_pemilik, nama from pemilik";
+                  $eksekusi = pg_query($sql);
+                  while ($data = pg_fetch_assoc($eksekusi)) {
+                    echo '<option value="'.$data['id_pemilik'].'">'.$data['nama'].'</option>';
+                  }
+                ?>
+          </select>
         </div>
+        <div class="col-sm-5 m-b-t-30">
+          <input id="dropper-default" class="form-control" id="pencarian2" name="pencarian" type="text" placeholder="Select your date" />
+        </div>
+        <div class="col-sm-2 m-b-t-30">
+          <button type="button" onclick="pencarian()" class="btn btn-success btn-square btn-block" name="button">Cari</button>
+        </div>
+
+
     </div>
   </div>
 </div>
@@ -57,10 +63,10 @@ Aldo Fungsional : 1
               <thead>
                   <tr>
                       <th></th>
-                      <th>Nama</th>
-                      <th>Kebangsaan</th>
-                      <th>Jabatan</th>
-                      <th>Kapal</th>
+                      <th>Jenis Kapal</th>
+                      <th>Nama Kapal</th>
+                      <th>Pemilik</th>
+                      <th>Kode</th>
                   </tr>
               </thead>
           </table>
@@ -83,7 +89,7 @@ Aldo Fungsional : 1
   </div> -->
 
   <div class="" id="map" style="width:100%; height:400px;">
-  <?php include $_SERVER['DOCUMENT_ROOT'].'/tb_bdl/view/aldo/fung1/map.php'; ?>
+  <?php include $_SERVER['DOCUMENT_ROOT'].'/tb_bdl/view/asraf/fung1/map.php'; ?>
 
   </div>
 </div>
@@ -95,38 +101,46 @@ Aldo Fungsional : 1
           // `d` is the original data object for the row
           return '<table class="table table-striped table-bordered nowrap">' +
             '<tr>' +
-            '<td>ID Anak Buah Kapal  </td>' +
-            '<td>' + d.id_abk + '</td>' +
-            '<td>Jabatan  </td>' +
-            '<td>' + d.jabatan + '</td>' +
+              '<td>ID Jenis Kapal  </td>' +
+              '<td>JNSKPL00' + d.id_jenis_kapal + '</td>' +
+              '<td>Tanggal Masuk  </td>' +
+              '<td>' + d.tanggal_masuk + '</td>' +
             '</tr>' +
             '<tr>' +
-            '<td>Kebangsaan  </td>' +
-            '<td>' + d.kebangsaan + '</td>' +
-            '<td>Sertifikat  </td>' +
-            '<td>' + d.sertifikat + '</td>' +
+              '<td>Jenis Kapal  </td>' +
+              '<td>' + d.jenis + '</td>' +
+              '<td>Nama Kapal  </td>' +
+              '<td>' + d.nama + '</td>' +
             '</tr>' +
             '<tr>' +
-            '<td>Kapal  </td>' +
-            '<td>'+ d.kapal +'</td>' +
-            '<td>Aksi</td>' +
-            '<td><a href="javascript:void(0)" onclick="satuabk('+d.id_abk+')" class="btn btn-primary btn-mini waves-effect waves-light"><i class="fa fa-map-pin"></i></a></td>' +
+              '<td>Pemilik Kapal </td>' +
+              '<td>' + d.pemilik + '</td>' +
+              '<td>kode  </td>' +
+              '<td>' + d.kode + '</td>' +
             '</tr>' +
+            '<tr>' +
+              '<td>Tanggal Keluar  </td>' +
+              '<td>' + d.tanggal_keluar + '</td>' +
+              '<td>Aksi</td>' +
+              '<td><a href="javascript:void(0)" onclick="satupemilik('+d.id_pemilik+')" class="btn btn-primary btn-mini waves-effect waves-light"><i class="fa fa-map-pin"></i></a></td>' +
+            '</tr>' +
+
             '</table>';
     }
 
     var ct = $('#table-f1').DataTable({
-        "ajax": 'http://localhost/tb_bdl/controller/aldocontroller/fung1controller.php?aksi=tablef1',
+      //rubah bagian link ajax dan data4 , link datang dari yg dibuka/ yg akan tampil
+        "ajax": 'http://localhost/tb_bdl/controller/asrafcontroller/fung1controller.php?aksi=tablef1',
         "columns": [{
                 "className": 'details-control',
                 "orderable": false,
                 "data": null,
                 "defaultContent": ''
             },
-            { "data": "namaabk"},
-            { "data": "kebangsaan" },
-            { "data": "jabatan" },
-            { "data": "kapal" }
+            { "data": "jenis"},
+            { "data": "nama" },
+            { "data": "pemilik" },
+            { "data": "kode" }
         ],
         "order": [
             [1, 'asc']
@@ -156,15 +170,18 @@ Aldo Fungsional : 1
 
         function pencarian() {
           var cari = [];
-          var select = document.getElementById("pencarian");
-          if(select.selectedOptions.length==0){
-            var link = 'http://localhost/tb_bdl/controller/aldocontroller/fung1controller.php?aksi=tablef1';
+          var select1 = document.getElementById("pencarian1");
+          var select2 = document.getElementById("dropper-default");
+
+          if(select1.selectedOptions.length==0 && select2.value==null){
+            var link = 'http://localhost/tb_bdl/controller/asrafcontroller/fung1controller.php?aksi=tablef1';
           }else{
-              for (var i=0; i < select.selectedOptions.length; i++) {
-                  cari.push(select.selectedOptions[i].value);
+              for (var i=0; i < select1.selectedOptions.length; i++) {
+                  cari.push(select1.selectedOptions[i].value);
               }
-            var id = cari.join(",");
-            var link = 'http://localhost/tb_bdl/controller/aldocontroller/fung1controller.php?aksi=tablef1&pencarian='+id;
+            var id1 = cari.join(",");
+            var id2 = select2.value;
+            var link = 'http://localhost/tb_bdl/controller/asrafcontroller/fung1controller.php?aksi=tablef1&pencarian1='+id1+'&pencarian2='+id2;
           }
           console.log(link);
           ct.ajax.url(link).load();

@@ -1,27 +1,27 @@
 <?php include $_SERVER['DOCUMENT_ROOT'].'/tb_bdl/blank.php'; ?>
 
-<?php startblock('title') ?> Aldo Fungsional : 1 <?php endblock() ?>
+<?php startblock('title') ?> Icha Fungsional : 5 <?php endblock() ?>
 
 <?php startblock('breadcrumb-link') ?>
-<li class="breadcrumb-item"><a href="#!">Aldo</a>
-<li class="breadcrumb-item"><a href="#!">Fungsional : 1</a>
+<li class="breadcrumb-item"><a href="#!">Icha</a>
+<li class="breadcrumb-item"><a href="#!">Fungsional : 5</a>
 <?php endblock() ?>
 
 <?php startblock('breadcrumb-title') ?>
-Aldo Fungsional : 1
+Icha Fungsional : 5
 <?php endblock() ?>
 
 <?php startblock('content') ?>
 <!-- menampilkan detail fungsional atau about fungsional -->
 <div class="card">
     <div class="card-header">
-        <h5 class="card-header-text">Description About Fungsional 1</h5>
+        <h5 class="card-header-text">Description About Fungsional 5</h5>
     </div>
     <div class="card-block user-desc">
         <div class="view-desc">
-            <p>fungsional : Menampilkan detail abk seperti nama, jabatan, kapal yg dipakai abk, kebangsaan berdasarkan jenis tangkapan<br>
-               Sehingga Fungsional Ini Mempermudah atau Membantu orang - orang untuk bertanya kesumbernya(awak yang menangkap ikan tadi) seperti tentang kondisi lautan, kondisi lokasi ikan banyak, dllnya.<br>
-               <font style="color:green">Aplikasi ini terdiri dari 7 table, yaitu table abk, jabatan, kebangsaan, kapal, pelayaran, produksi, jenis_tangkapan</font>
+            <p>Fungsional Ini Berfungsi untuk mengetahui Lokasi-lokasi dari usaha pemilik kapal yang akan meliputi keterangan dari kepemilikan kapal, kapal beserta detail kapal yang terdiri dari abk, jenis kapal, alat tangkap kapal, beserta nama dari alat tangkap, beserta pelayaran dan produksi untuk menghasilkan jenis tangkapan. Lokasi pemilik tersebut akan dicari berdasarkan jenis tangkapan yang dihasilkan dari produksi kapalnya.<br>
+               Sehingga Fungsional Ini Mempermudah pencarian alamat dari pemilik kapal yang menghasilkan jenis tangkapan tertentu.<br>
+               <font style="color:green">Aplikasi ini terdiri dari 10  table, yaitu table pemilik, kepemilikan_kapal, jenis_kapal, abk, alat_tangkap_kapal,alat_tangkap, pelayaran, produksi, jenis_tangkapan</font>
             </p>
         </div>
     </div>
@@ -57,10 +57,10 @@ Aldo Fungsional : 1
               <thead>
                   <tr>
                       <th></th>
-                      <th>Nama</th>
-                      <th>Kebangsaan</th>
-                      <th>Jabatan</th>
-                      <th>Kapal</th>
+                      <th>Nama Pemilik</th>
+                      <th>Nama Kapal</th>
+                      <th>Jenis Kapal</th>
+
                   </tr>
               </thead>
           </table>
@@ -81,9 +81,9 @@ Aldo Fungsional : 1
       </div>
     </div>
   </div> -->
-
+ <!-- id="map" digunakan pada basemap, fungsi base map digunakan untuk menampilkan peta polos -->
   <div class="" id="map" style="width:100%; height:400px;">
-  <?php include $_SERVER['DOCUMENT_ROOT'].'/tb_bdl/view/aldo/fung1/map.php'; ?>
+  <?php include $_SERVER['DOCUMENT_ROOT'].'/tb_bdl/view/icha/fung1/map.php'; ?>
 
   </div>
 </div>
@@ -95,38 +95,37 @@ Aldo Fungsional : 1
           // `d` is the original data object for the row
           return '<table class="table table-striped table-bordered nowrap">' +
             '<tr>' +
-            '<td>ID Anak Buah Kapal  </td>' +
-            '<td>' + d.id_abk + '</td>' +
-            '<td>Jabatan  </td>' +
-            '<td>' + d.jabatan + '</td>' +
+            '<td>ID Kapal  </td>' +
+            '<td>' + d.id_kapal + '</td>' +
+            '<td> Jumlah Alat Tangkap  </td>' +
+            '<td>' + d.jumlah_alat_tangkap + '</td>' +
             '</tr>' +
             '<tr>' +
-            '<td>Kebangsaan  </td>' +
-            '<td>' + d.kebangsaan + '</td>' +
-            '<td>Sertifikat  </td>' +
-            '<td>' + d.sertifikat + '</td>' +
+            '<td>Jumlah ABK  </td>' +
+            '<td>' + d.jabk + '</td>' +
+            '<td>Keterangan  </td>' +
+            '<td>' + d.keterangan + '</td>' +
             '</tr>' +
-            '<tr>' +
-            '<td>Kapal  </td>' +
-            '<td>'+ d.kapal +'</td>' +
+            '<tr>'+
+            '<td>Jenis Tangkapan </td>' +
+            '<td>'+ d.nama +'</td>' +
             '<td>Aksi</td>' +
-            '<td><a href="javascript:void(0)" onclick="satuabk('+d.id_abk+')" class="btn btn-primary btn-mini waves-effect waves-light"><i class="fa fa-map-pin"></i></a></td>' +
+            '<td><a href="javascript:void(0)" onclick="pemilik('+d.id_pemilik+')" class="btn btn-primary btn-mini waves-effect waves-light"><i class="fa fa-map-pin"></i></a></td>' +
             '</tr>' +
             '</table>';
     }
 
     var ct = $('#table-f1').DataTable({
-        "ajax": 'http://localhost/tb_bdl/controller/aldocontroller/fung1controller.php?aksi=tablef1',
+        "ajax": 'http://localhost/tb_bdl/controller/ichacontroller/fung5controller.php?aksi=tablef1',
         "columns": [{
                 "className": 'details-control',
                 "orderable": false,
                 "data": null,
                 "defaultContent": ''
             },
-            { "data": "namaabk"},
-            { "data": "kebangsaan" },
-            { "data": "jabatan" },
-            { "data": "kapal" }
+            { "data": "nama_pemilik"},
+            { "data": "nama_kapal" },
+            { "data": "jenis_kapal" },
         ],
         "order": [
             [1, 'asc']
@@ -158,13 +157,13 @@ Aldo Fungsional : 1
           var cari = [];
           var select = document.getElementById("pencarian");
           if(select.selectedOptions.length==0){
-            var link = 'http://localhost/tb_bdl/controller/aldocontroller/fung1controller.php?aksi=tablef1';
+            var link = 'http://localhost/tb_bdl/controller/ichacontroller/fung5controller.php?aksi=tablef1';
           }else{
               for (var i=0; i < select.selectedOptions.length; i++) {
                   cari.push(select.selectedOptions[i].value);
               }
             var id = cari.join(",");
-            var link = 'http://localhost/tb_bdl/controller/aldocontroller/fung1controller.php?aksi=tablef1&pencarian='+id;
+            var link = 'http://localhost/tb_bdl/controller/ichacontroller/fung5controller.php?aksi=tablef1&pencarian='+id;
           }
           console.log(link);
           ct.ajax.url(link).load();

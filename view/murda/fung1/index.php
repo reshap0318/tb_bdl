@@ -1,14 +1,14 @@
 <?php include $_SERVER['DOCUMENT_ROOT'].'/tb_bdl/blank.php'; ?>
 
-<?php startblock('title') ?> Aldo Fungsional : 1 <?php endblock() ?>
+<?php startblock('title') ?> Murda Fungsional : 1 <?php endblock() ?>
 
 <?php startblock('breadcrumb-link') ?>
-<li class="breadcrumb-item"><a href="#!">Aldo</a>
+<li class="breadcrumb-item"><a href="#!">Murda</a>
 <li class="breadcrumb-item"><a href="#!">Fungsional : 1</a>
 <?php endblock() ?>
 
 <?php startblock('breadcrumb-title') ?>
-Aldo Fungsional : 1
+Murda Fungsional : 1
 <?php endblock() ?>
 
 <?php startblock('content') ?>
@@ -19,9 +19,9 @@ Aldo Fungsional : 1
     </div>
     <div class="card-block user-desc">
         <div class="view-desc">
-            <p>fungsional : Menampilkan detail abk seperti nama, jabatan, kapal yg dipakai abk, kebangsaan berdasarkan jenis tangkapan<br>
+            <p>fungsional : Menampilkan ABK meliputi id_kapal, id_abk, nama abk, jabatan, kebangsaan, sertifikat, kapal, jenis kapal, berdasarkan pelabuhan yang melewati table keterangan_pelayaran_abk, pelayaran, pelabuhan <br>
                Sehingga Fungsional Ini Mempermudah atau Membantu orang - orang untuk bertanya kesumbernya(awak yang menangkap ikan tadi) seperti tentang kondisi lautan, kondisi lokasi ikan banyak, dllnya.<br>
-               <font style="color:green">Aplikasi ini terdiri dari 7 table, yaitu table abk, jabatan, kebangsaan, kapal, pelayaran, produksi, jenis_tangkapan</font>
+               <font style="color:green">Aplikasi ini terdiri dari 8 table, yaitu abk, kebangsaan, jabatan, kapal, jenis_kapal, keterangan_pelayaran_abk, pelayaran, pelabuhan</font>
             </p>
         </div>
     </div>
@@ -32,15 +32,16 @@ Aldo Fungsional : 1
     <div class="row">
         <div class="col-sm-12">
           <div class="input-group input-group-button">
-            <select name="pencarian[]" class="form-control js-example-basic-hide-search" multiple="multiple" id="pencarian">
-              <?php
-                include $_SERVER['DOCUMENT_ROOT'].'/tb_bdl/controller/koneksi.php';
-                $sql = "SELECT id_jenis_tangkapan, nama from jenis_tangkapan";
-                $eksekusi = pg_query($sql);
-                while ($data = pg_fetch_assoc($eksekusi)) {
-                  echo '<option value="'.$data['id_jenis_tangkapan'].'">'.$data['nama'].'</option>';
-                }
-              ?>
+            <select name="pencarian" class="form-control js-example-basic-single" id="pencarian">
+                  <option value="">---Pilihan Pelabuhan---</option>
+                  <?php
+                    include $_SERVER['DOCUMENT_ROOT'].'/tb_bdl/controller/koneksi.php';
+                    $sql = "SELECT id_pelabuhan, nama from pelabuhan";
+                    $eksekusi = pg_query($sql);
+                    while ($data = pg_fetch_assoc($eksekusi)) {
+                      echo '<option value="'.$data['id_pelabuhan'].'">'.$data['nama'].'</option>';
+                    }
+                  ?>
             </select>
             <button class="input-group-addon btn btn-primary" onclick="pencarian()" id="basic-addon10" type="submit"  name="cari">cari</button>
           </div>
@@ -60,7 +61,6 @@ Aldo Fungsional : 1
                       <th>Nama</th>
                       <th>Kebangsaan</th>
                       <th>Jabatan</th>
-                      <th>Kapal</th>
                   </tr>
               </thead>
           </table>
@@ -83,7 +83,7 @@ Aldo Fungsional : 1
   </div> -->
 
   <div class="" id="map" style="width:100%; height:400px;">
-  <?php include $_SERVER['DOCUMENT_ROOT'].'/tb_bdl/view/aldo/fung1/map.php'; ?>
+  <?php include $_SERVER['DOCUMENT_ROOT'].'/tb_bdl/view/murda/fung1/map.php'; ?>
 
   </div>
 </div>
@@ -116,17 +116,16 @@ Aldo Fungsional : 1
     }
 
     var ct = $('#table-f1').DataTable({
-        "ajax": 'http://localhost/tb_bdl/controller/aldocontroller/fung1controller.php?aksi=tablef1',
+        "ajax": 'http://localhost/tb_bdl/controller/murdacontroller/fung1controller.php?aksi=tablef1',
         "columns": [{
                 "className": 'details-control',
                 "orderable": false,
                 "data": null,
                 "defaultContent": ''
             },
-            { "data": "namaabk"},
+            { "data": "nama"},
             { "data": "kebangsaan" },
-            { "data": "jabatan" },
-            { "data": "kapal" }
+            { "data": "jabatan" }
         ],
         "order": [
             [1, 'asc']
@@ -154,21 +153,16 @@ Aldo Fungsional : 1
     });
 
 
-        function pencarian() {
-          var cari = [];
-          var select = document.getElementById("pencarian");
-          if(select.selectedOptions.length==0){
-            var link = 'http://localhost/tb_bdl/controller/aldocontroller/fung1controller.php?aksi=tablef1';
-          }else{
-              for (var i=0; i < select.selectedOptions.length; i++) {
-                  cari.push(select.selectedOptions[i].value);
-              }
-            var id = cari.join(",");
-            var link = 'http://localhost/tb_bdl/controller/aldocontroller/fung1controller.php?aksi=tablef1&pencarian='+id;
-          }
-          console.log(link);
-          ct.ajax.url(link).load();
-        }
+    function pencarian() {
+      var select = document.getElementById("pencarian").options[document.getElementById("pencarian").selectedIndex].value;
+      if(select==''){
+        var link = 'http://localhost/tb_bdl/controller/murdacontroller/fung1controller.php?aksi=tablef1';
+      }else{
+        var link = 'http://localhost/tb_bdl/controller/murdacontroller/fung1controller.php?aksi=tablef1&pencarian='+select;
+      }
+      console.log(link);
+      ct.ajax.url(link).load();
+    }
 
 
   </script>

@@ -241,7 +241,7 @@ Aldo Fungsional : 3
               { "data": "ikan"},
               { "data": "berat"},
               { "data": "harga"},
-              { "data": "Tanggal"},
+              { "data": "tanggal"},
             ],
           "order": [
               [0, 'asc']

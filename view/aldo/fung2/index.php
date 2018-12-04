@@ -19,9 +19,9 @@ Aldo Fungsional : 2
     </div>
     <div class="card-block user-desc">
         <div class="view-desc">
-            <p>Fungsional Ini Berfungsi untuk mengetahui Lokasi Rumah Dari Anak Buah Kapal yang Berdasarkan Tanggal Pelayarannya.<br>
+            <p>Mencari ABK, mencangkup nama, jabatan, kebangsaan, kapal, jenis kapal, jumlah alat tangkap, jumlah pemilik kapal, lokasi rumah abk berdasarkan tanggal_berlayar kapal<br>
                Sehingga Fungsional Ini Mempermudah atau Membantu orang - orang untuk mencari Anak Buah Kapal yang berlayar pada waktu tertentu, jadi misalkan kita tertarik untuk bekerja sama dengan seseorang yang pernah kita bekerja di waktu yang sama, kita bisa mencari nya disi. atau jika ada Anak buah kapal yang hilang juga bisa mempermudah orang - orang untuk mencarinya<br>
-               <font style="color:green">Aplikasi ini terdiri dari 6 table, yaitu table abk, jabatan, kebangsaan, kapal, pelayaran, produksi, jenis_tangkapan</font>
+               <font style="color:green">Aplikasi ini terdiri dari 9 table, yaitu table pelayaran, kapal, jenis_kapal, alat_tangap_kapal, kepemilikan_kapal, abk, jabatan, kebangsaan, keterangan_pelayaran_abk</font>
             </p>
         </div>
     </div>
