@@ -83,7 +83,7 @@ Icha Fungsional : 5
   </div> -->
  <!-- id="map" digunakan pada basemap, fungsi base map digunakan untuk menampilkan peta polos -->
   <div class="" id="map" style="width:100%; height:400px;">
-  <?php include $_SERVER['DOCUMENT_ROOT'].'/tb_bdl/view/icha/fung1/map.php'; ?>
+  <?php include $_SERVER['DOCUMENT_ROOT'].'/tb_bdl/view/icha/fung5/map.php'; ?>
 
   </div>
 </div>
@@ -95,22 +95,34 @@ Icha Fungsional : 5
           // `d` is the original data object for the row
           return '<table class="table table-striped table-bordered nowrap">' +
             '<tr>' +
-            '<td>ID Kapal  </td>' +
-            '<td>' + d.id_kapal + '</td>' +
-            '<td> Jumlah Alat Tangkap  </td>' +
-            '<td>' + d.jumlah_alat_tangkap + '</td>' +
+              '<td>Kode Pemilik</td>' +
+              '<td>PMLKRSP0' + d.id_pemilik + '</td>' +
+              '<td> Kode Kapal  </td>' +
+              '<td>KPLRSP0' + d.id_kapal + '</td>' +
             '</tr>' +
             '<tr>' +
-            '<td>Jumlah ABK  </td>' +
-            '<td>' + d.jabk + '</td>' +
-            '<td>Keterangan  </td>' +
-            '<td>' + d.keterangan + '</td>' +
+              '<td>Nama Pemilik  </td>' +
+              '<td>' + d.nama_pemilik + '</td>' +
+              '<td>Kapal  </td>' +
+              '<td>' + d.nama_kapal + '</td>' +
+            '</tr>' +
+            '<tr>' +
+              '<td>Keterangan Kepemilikan </td>' +
+              '<td>' + d.keterangan + '</td>' +
+              '<td>Jenis Kapal </td>' +
+              '<td>' + d.jenis_kapal + '</td>' +
+            '</tr>' +
+            '<tr>' +
+              '<td>Jumlah Alat Tangkap </td>' +
+              '<td>' + d.jumlah_alat_tangkap + ' Buah</td>' +
+              '<td>Jumlah ABK</td>' +
+              '<td>' + d.jabk + ' Buah</td>' +
             '</tr>' +
             '<tr>'+
-            '<td>Jenis Tangkapan </td>' +
-            '<td>'+ d.nama +'</td>' +
-            '<td>Aksi</td>' +
-            '<td><a href="javascript:void(0)" onclick="pemilik('+d.id_pemilik+')" class="btn btn-primary btn-mini waves-effect waves-light"><i class="fa fa-map-pin"></i></a></td>' +
+              '<td>Jumlah Jenis Tangkapan </td>' +
+              '<td>'+ d.jjenis_tangkapan +' Buah</td>' +
+              '<td>Aksi</td>' +
+              '<td><a href="javascript:void(0)" onclick="satupemilik('+d.id_pemilik+')" class="btn btn-primary btn-mini waves-effect waves-light"><i class="fa fa-map-pin"></i></a></td>' +
             '</tr>' +
             '</table>';
     }

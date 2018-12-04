@@ -3,7 +3,7 @@
 var pos ='null';
 var circles=[];
 var info_windows = [];
-var server = "http://localhost/tb_bdl/controller/ichacontroller/fung5controller.php?aksi=";
+var server = "http://localhost/tb_bdl/controller/aldocontroller/fung5controller.php?aksi=";
 var markers = [];
 var directionsDisplay;
 var rute = [];  //NAVIGASI
@@ -13,16 +13,16 @@ var jalurAngkot=[];
 var centerLokasi; //untuk fungsi CallRoute()
 
 window.onload = function() {
-  pemilik();
+  abk();
   basemap();
-  semuapemilik();
+  semuaabk();
 };
 
-function pemilik() //tampil digitasi pemilik
+function abk() //tampil digitasi abk
 {
-    pemilik = new google.maps.Data();
-    pemilik.loadGeoJson(server+'layer');
-    pemilik.setStyle(function(feature){
+    abk = new google.maps.Data();
+    abk.loadGeoJson(server+'layer');
+    abk.setStyle(function(feature){
         return({
             fillColor: '#42cb6f',
             strokeColor: '#42cb6f',
@@ -30,7 +30,7 @@ function pemilik() //tampil digitasi pemilik
             fillOpacity: 7
         });
     });
-    pemilik.setMap(map);
+    abk.setMap(map);
 }
 function basemap(){
     map = new google.maps.Map(document.getElementById('map'), {
@@ -53,13 +53,13 @@ function hapusmarker() {
   }
 }
 
-function semuapemilik(){ //menampilkan semua pemilik
-  $.ajax({ url: server+'pemilik', data: "", dataType: 'json', success: function (rows){
-    tampilsemuapemilik(rows, 10);
+function semuaabk(){ //menampilkan semua abk
+  $.ajax({ url: server+'abk', data: "", dataType: 'json', success: function (rows){
+    tampilsemuaabk(rows, 10);
   }});
 }
 
-function tampilsemuapemilik(rows, zoom){ //fungsi cari mesjid berdasarkan nama
+function tampilsemuaabk(rows, zoom){ //fungsi cari mesjid berdasarkan nama
   if(rows==null){
     alert('ABK not found');
   }
@@ -91,7 +91,7 @@ function detail_info(nama, center){  //menampilkan informasi masjid
   google.maps.event.addListener(marker, "click", function(){
     infowindow = new google.maps.InfoWindow({
       position: center,
-      content: "Lokasi Rumah "+nama,
+      content: "Rumah "+nama,
       pixelOffset: new google.maps.Size(0, -33)
     });
     info_windows.push(infowindow);
@@ -100,11 +100,11 @@ function detail_info(nama, center){  //menampilkan informasi masjid
   });
 }
 
-function satupemilik(id) {
-  $.ajax({ url: server+'pemilik&pencarian='+id, data: "", dataType: 'json', success: function (rows){
+function satuabk(id) {
+  $.ajax({ url: server+'abk&pencarian='+id, data: "", dataType: 'json', success: function (rows){
     hapusInfo();
     hapusmarker();
-    tampilsemuapemilik(rows, 18);
+    tampilsemuaabk(rows, 18);
   }});
 }
 
