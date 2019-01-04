@@ -19,7 +19,7 @@ Aldo Fungsional : 5
     </div>
     <div class="card-block user-desc">
         <div class="view-desc">
-            <p>Fungsional : Menampilkan detail KUB yaitu nama kub, kebangsaan kub, kebangsaan kub, jumlah pelayaran kub, kapal kub, jenis_kapal kub, jumlah alat tangkap pada kapal kub berdasarkan alat tangkap yang ada<br>
+            <p>Fungsional : menampilkan detail abk, yaitu, nama, kebangsaan, jabatan, kapal yang di gunakan, jenis kapal, jumlah pelayaran, jumlah alat tangkap di kapal abk berdasarkan alat_tangkap<br>
                Sehingga Fungsional Ini Mempermudah atau Membantu orang - orang untuk bertanya kesumbernya(awak yang menangkap ikan tadi) seperti tentang kondisi lautan, kondisi lokasi ikan banyak, dllnya.<br>
                <font style="color:green">Aplikasi ini terdiri dari 8 table, yaitu table abk, jabatan, kebangsaan, kapal, keterangan_pelayaran_abk, jenis_kapal, alat_tangkap_kapal, alat_tangkap</font>
             </p>
